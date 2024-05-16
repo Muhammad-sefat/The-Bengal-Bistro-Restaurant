@@ -1,4 +1,6 @@
 import Carousels from "./Carousel";
+import MenuSection from "./MenuSection";
+import SingleSection from "./SingleSection";
 import Slider from "./Slider";
 
 const Home = () => {
@@ -6,6 +8,8 @@ const Home = () => {
     <div>
       <Carousels></Carousels>
       <Slider></Slider>
+      <SingleSection></SingleSection>
+      <MenuSection></MenuSection>
     </div>
   );
 };

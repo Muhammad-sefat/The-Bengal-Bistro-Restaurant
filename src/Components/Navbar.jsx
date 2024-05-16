@@ -47,7 +47,7 @@ const Navbar = () => {
   );
   return (
     <div>
-      <div className="navbar bg-base-100">
+      <div className="navbar fixed my-0 z-20 opacity-90 bg-red-800 text-white md:w-[95%]">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -73,7 +73,7 @@ const Navbar = () => {
               {navMenu}
             </ul>
           </div>
-          <a className="btn btn-ghost text-2xl">
+          <a className="btn btn-ghost text-2xl font-bold uppercase">
             The Bengal Bistro <span className="text-xs">Restaurant</span>
           </a>
         </div>

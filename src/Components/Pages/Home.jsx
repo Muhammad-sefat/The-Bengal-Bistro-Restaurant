@@ -1,9 +1,11 @@
 import Carousels from "./Carousel";
+import Slider from "./Slider";
 
 const Home = () => {
   return (
-    <div className="my-8">
+    <div>
       <Carousels></Carousels>
+      <Slider></Slider>
     </div>
   );
 };

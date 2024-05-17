@@ -4,6 +4,7 @@ import MenuSection from "./MenuSection";
 import OurFeatured from "./OurFeatured";
 import SingleSection from "./SingleSection";
 import Slider from "./Slider";
+import Testimonial from "./Testimonial";
 
 const Home = () => {
   return (
@@ -14,6 +15,7 @@ const Home = () => {
       <MenuSection></MenuSection>
       <ChefRecommend></ChefRecommend>
       <OurFeatured></OurFeatured>
+      <Testimonial></Testimonial>
     </div>
   );
 };

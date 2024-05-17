@@ -4,7 +4,7 @@ import SharedPage from "./SharedPage";
 const OurFeatured = () => {
   return (
     <div
-      className="bg-center h-[90vh] bg-fixed my-16 text-white p-5"
+      className="bg-center h-[90vh]  bg-fixed my-16 text-white p-5"
       style={{
         backgroundImage: `url(${menu})`,
       }}

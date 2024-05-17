@@ -1,18 +1,11 @@
-import useMenu from "../Hooks/useMenu";
-import SharedPage from "./SharedPage";
+import OurMenu from "./OurMenu";
 import SingleMenu from "./SingleMenu";
 
-const MenuSection = () => {
-  const [menus] = useMenu();
-  const datas = menus.filter((menu) => menu.category === "soup");
+const MenuCategory = ({ items }) => {
   return (
     <div>
-      <SharedPage
-        subHeading={"--- Check it out ---"}
-        heading={"FROM OUR MENU"}
-      ></SharedPage>
       <div className="grid md:grid-cols-2 gap-5">
-        {datas.map((item) => (
+        {items.map((item) => (
           <SingleMenu key={item._id} item={item}></SingleMenu>
         ))}
       </div>
@@ -25,4 +18,4 @@ const MenuSection = () => {
   );
 };
 
-export default MenuSection;
+export default MenuCategory;

@@ -1,4 +1,3 @@
-import OurMenu from "./OurMenu";
 import SingleMenu from "./SingleMenu";
 
 const MenuCategory = ({ items }) => {

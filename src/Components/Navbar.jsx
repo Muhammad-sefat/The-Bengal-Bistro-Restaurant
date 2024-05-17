@@ -47,7 +47,7 @@ const Navbar = () => {
   );
   return (
     <div>
-      <div className="navbar fixed my-0 z-20 opacity-90 bg-red-800 text-white md:w-[95%]">
+      <div className="navbar fixed z-20 opacity-90 bg-red-800 text-white md:w-[95%]">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -113,13 +113,10 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+              className="menu menu-sm dropdown-content mt-3 text-black z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <a className="justify-between">
-                  Profile
-                  <span className="badge">New</span>
-                </a>
+                <a>Profile</a>
               </li>
               <li>
                 <a>Settings</a>

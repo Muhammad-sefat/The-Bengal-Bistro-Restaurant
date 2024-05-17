@@ -3,6 +3,7 @@ import App from "../App";
 import Home from "./Pages/Home";
 import ErrorPage from "./ErrorPage";
 import Menu from "./Pages/Menu";
+import OurShop from "./Pages/OurShop";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
       {
         path: "/our-menu",
         element: <Menu></Menu>,
+      },
+      {
+        path: "our-shop",
+        element: <OurShop></OurShop>,
       },
     ],
   },

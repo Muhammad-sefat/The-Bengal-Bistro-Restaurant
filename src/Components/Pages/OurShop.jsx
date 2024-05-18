@@ -5,7 +5,6 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import useMenu from "../Hooks/useMenu";
 
-import FoodCard from "./FoodCard";
 import TabCategory from "./TabCategory";
 
 const OurShop = () => {

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import SingleMenu from "./SingleMenu";
 
 const MenuCategory = ({ items }) => {
@@ -9,9 +10,11 @@ const MenuCategory = ({ items }) => {
         ))}
       </div>
       <div>
-        <button className="text-lg font-semibold border-b-2 hover:bg-red-600 hover:text-white hover:p-2 hover:rounded">
-          Show All Menu
-        </button>
+        <Link to={`/our-shop`}>
+          <button className="text-lg font-semibold border-b-2 hover:bg-red-600 hover:text-white hover:p-2 hover:rounded">
+            Show All Menu
+          </button>
+        </Link>
       </div>
     </div>
   );

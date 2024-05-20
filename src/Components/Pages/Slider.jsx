@@ -12,7 +12,7 @@ import slider5 from "../../assets/home/slide5.jpg";
 import SharedPage from "./SharedPage";
 const Slider = () => {
   return (
-    <div className="my-6">
+    <div>
       <SharedPage
         subHeading={"--- From 11:00am to 10:00pm ---"}
         heading={"order online"}

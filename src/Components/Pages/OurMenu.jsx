@@ -1,6 +1,6 @@
 const OurMenu = ({ hedaing, title, image }) => {
   return (
-    <div className="my-8">
+    <div>
       <div
         className="hero min-h-screen"
         style={{

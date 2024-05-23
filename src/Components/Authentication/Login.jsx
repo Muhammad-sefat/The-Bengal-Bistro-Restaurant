@@ -1,22 +1,65 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import food from "../../assets/food-01.jpg";
+import { useForm } from "react-hook-form";
+import useAuth from "../Hooks/useAuth";
+import toast from "react-hot-toast";
 const Login = () => {
+  const { signIn, signInWithGoogle } = useAuth();
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = async (data) => {
+    const { email, password } = data;
+    try {
+      const result = await signIn(email, password);
+      console.log(result);
+      toast.success("SignIn Success");
+      reset();
+      navigate("/");
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
+
+  const googleSignIn = () => {
+    try {
+      signInWithGoogle();
+      toast.success("SignIn Success");
+      navigate("/");
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
   return (
     <div className="bg-amber-600 p-10 flex items-center justify-between gap-5">
       <div className="w-full md:w-1/2 text-left max-w-md p-8 space-y-3 rounded-xl dark:bg-gray-50 dark:text-gray-800 bg-rose-300">
         <h1 className="text-2xl font-bold text-center">Login</h1>
-        <form noValidate="" action="" className="space-y-6">
+        <form
+          noValidate=""
+          action=""
+          onSubmit={handleSubmit(onSubmit)}
+          className="space-y-6"
+        >
           <div className="space-y-1 text-sm">
-            <label htmlFor="username" className="block dark:text-gray-600">
+            <label htmlFor="email" className="block dark:text-gray-600">
               Username
             </label>
             <input
-              type="text"
-              name="username"
-              id="username"
-              placeholder="Username"
+              type="email"
+              name="email"
+              id="email"
+              placeholder="User Email"
               className="w-full px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
+              {...register("email", { required: true })}
             />
+            {errors.email && (
+              <span className="text-red-500">This field is required</span>
+            )}
           </div>
           <div className="space-y-1 text-sm">
             <label htmlFor="password" className="block dark:text-gray-600">
@@ -28,7 +71,11 @@ const Login = () => {
               id="password"
               placeholder="Password"
               className="w-full px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
+              {...register("password", { required: true })}
             />
+            {errors.password && (
+              <span className="text-red-500">This field is required</span>
+            )}
             <div className="flex justify-end text-xs dark:text-gray-600">
               <a rel="noopener noreferrer" href="#">
                 Forgot Password?
@@ -47,7 +94,11 @@ const Login = () => {
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
         </div>
         <div className="flex justify-center space-x-4">
-          <button aria-label="Log in with Google" className="p-3 rounded-sm">
+          <button
+            onClick={googleSignIn}
+            aria-label="Log in with Google"
+            className="p-3 rounded-sm"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 32 32"

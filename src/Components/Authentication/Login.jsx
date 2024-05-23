@@ -1,15 +1,17 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import food from "../../assets/food-01.jpg";
 import { useForm } from "react-hook-form";
 import useAuth from "../Hooks/useAuth";
 import toast from "react-hot-toast";
 const Login = () => {
   const { signIn, signInWithGoogle } = useAuth();
+  const location = useLocation();
   const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
+  console.log(from);
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm();
 
@@ -19,18 +21,17 @@ const Login = () => {
       const result = await signIn(email, password);
       console.log(result);
       toast.success("SignIn Success");
-      reset();
-      navigate("/");
+      navigate(from);
     } catch (err) {
       toast.error(err.message);
     }
   };
 
-  const googleSignIn = () => {
+  const googleSignIn = async () => {
     try {
-      signInWithGoogle();
-      toast.success("SignIn Success");
-      navigate("/");
+      await signInWithGoogle();
+      toast.success("SignIn Successful");
+      navigate(from);
     } catch (err) {
       toast.error(err.message);
     }

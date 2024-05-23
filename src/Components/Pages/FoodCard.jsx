@@ -1,10 +1,12 @@
 import Swal from "sweetalert2";
 import useAuth from "../Hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const FoodCard = ({ item }) => {
-  const { name, image, recipe, _id } = item;
+  const { name, image, recipe, _id, price } = item;
   const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -17,6 +19,17 @@ const FoodCard = ({ item }) => {
         image,
         price,
       };
+      axiosSecure.post(`/carts`, cartItem).then((res) => {
+        if (res.data.insertedId) {
+          Swal.fire({
+            position: "top-start",
+            icon: "success",
+            title: "Cart Add Successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
     } else {
       Swal.fire({
         title: "You Are Not Logged!",
@@ -35,10 +48,15 @@ const FoodCard = ({ item }) => {
   };
   return (
     <div>
-      <div className="card  bg-base-100 shadow-xl border">
-        <figure>
-          <img src={image} alt="salad" />
-        </figure>
+      <div className="card  bg-base-100 shadow-xl border ">
+        <div className="relative">
+          <figure>
+            <img src={image} alt="salad" />
+          </figure>
+          <p className="absolute p-2 rounded text-xl font-semibold text-orange-600 bg-black top-0">
+            {price}
+          </p>
+        </div>
         <div className="card-body">
           <h2 className="text-center text-xl font-semibold">{name}</h2>
           <p>{recipe}</p>

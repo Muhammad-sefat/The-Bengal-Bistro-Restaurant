@@ -1,9 +1,13 @@
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "./Hooks/useAuth";
-import toast from "react-hot-toast";
+
+import useCart from "./Hooks/useCart";
 
 const Navbar = () => {
   const { logOut, user } = useAuth();
+
+  const [cart] = useCart();
+  console.log(cart);
 
   const navMenu = (
     <>
@@ -105,7 +109,7 @@ const Navbar = () => {
                 />
               </svg>
               <span className="badge badge-xs badge-primary indicator-item">
-                +0
+                {cart.length}
               </span>
             </div>
           </button>

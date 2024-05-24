@@ -1,13 +1,41 @@
+import Swal from "sweetalert2";
 import useCart from "../Hooks/useCart";
 import SharedPage from "../Pages/SharedPage";
 import { FaRegTrashAlt } from "react-icons/fa";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const Cart = () => {
-  const [cart] = useCart();
+  const [cart, refetch] = useCart();
+  const axiosSecure = useAxiosSecure();
   const totalCart = cart.reduce(
     (total, currPrice) => total + currPrice.price,
     0
   );
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/carts/${id}`).then((res) => {
+          if (res.data.deletedCount > 0) {
+            refetch();
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+          }
+        });
+      }
+    });
+  };
 
   return (
     <div>
@@ -51,7 +79,10 @@ const Cart = () => {
                 <td>{item.name}</td>
                 <td>${item.price}</td>
                 <th>
-                  <button className="bg-red-500 p-3 text-white rounded">
+                  <button
+                    onClick={() => handleDelete(item._id)}
+                    className="bg-red-500 p-3 text-white rounded"
+                  >
                     <FaRegTrashAlt />
                   </button>
                 </th>

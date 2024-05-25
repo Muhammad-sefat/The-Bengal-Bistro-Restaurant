@@ -13,7 +13,7 @@ import { NavLink, Outlet } from "react-router-dom";
 const Dashboard = () => {
   return (
     <div className="flex">
-      <div className="w-64 min-h-screen bg-yellow-400">
+      <div className="w-64 min-h-screen bg-yellow-400 mr-5">
         <div>
           <a className="btn btn-ghost text-xl font-bold uppercase p-3">
             The Bengal Bistro <span className="text-xs">Restaurant</span>
@@ -80,7 +80,7 @@ const Dashboard = () => {
           </li>
         </ul>
       </div>
-      <div className="flex-1 p-8">
+      <div className="flex-1 px-8">
         <Outlet></Outlet>
       </div>
     </div>

@@ -6,6 +6,7 @@ import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const Cart = () => {
   const [cart, refetch] = useCart();
+  console.log(cart);
   const axiosSecure = useAxiosSecure();
   const totalCart = cart.reduce(
     (total, currPrice) => total + currPrice.price,

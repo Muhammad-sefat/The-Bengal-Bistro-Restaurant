@@ -4,10 +4,12 @@ import { useForm } from "react-hook-form";
 import useAuth from "../Hooks/useAuth";
 import toast from "react-hot-toast";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 const Register = () => {
   const { user, setUser, creatUser, updateUser } = useAuth();
   const [showBtn, setShowBtn] = useState(false);
+  const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
   const {
     register,
@@ -23,9 +25,19 @@ const Register = () => {
       await updateUser(name, photo);
       setUser({ ...user?.email, displayName: name, photoURL: photo });
       console.log(result);
-      toast("Register Successful");
-      reset();
-      navigate("/");
+
+      const userInfo = {
+        name,
+        email,
+      };
+
+      axiosPublic.post("/users", userInfo).then((res) => {
+        if (res.data.insertedId) {
+          toast("Register Successful");
+          reset();
+          navigate("/");
+        }
+      });
     } catch (error) {
       toast.error(error);
     }
@@ -109,9 +121,6 @@ const Register = () => {
                 {showBtn ? <FaEye></FaEye> : <FaEyeSlash></FaEyeSlash>}
               </span>
             </div>
-            {errors.password && (
-              <span className="text-red-500">This field is required</span>
-            )}
           </div>
           <div>
             <button

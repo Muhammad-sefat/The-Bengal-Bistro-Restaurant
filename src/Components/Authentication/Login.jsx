@@ -3,12 +3,15 @@ import food from "../../assets/food-01.jpg";
 import { useForm } from "react-hook-form";
 import useAuth from "../Hooks/useAuth";
 import toast from "react-hot-toast";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 const Login = () => {
-  const { signIn, signInWithGoogle } = useAuth();
+  const { signIn, signInWithGoogle, user } = useAuth();
+  console.log(user);
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
-  console.log(from);
+  const axiosPublic = useAxiosPublic();
+
   const {
     register,
     handleSubmit,
@@ -31,7 +34,18 @@ const Login = () => {
     try {
       await signInWithGoogle();
       toast.success("SignIn Successful");
-      navigate(from);
+
+      const userInfo = {
+        name: user?.displayName,
+        email: user?.email,
+      };
+      console.log(userInfo);
+
+      axiosPublic.post("/users", userInfo).then((res) => {
+        if (res.data.insertedId) {
+          navigate(from);
+        }
+      });
     } catch (err) {
       toast.error(err.message);
     }

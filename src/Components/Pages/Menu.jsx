@@ -10,12 +10,12 @@ import dessertImg from "../../assets/menu/dessert-bg.jpeg";
 import pizzaImg from "../../assets/menu/pizza-bg.jpg";
 import { Helmet } from "react-helmet-async";
 const Menu = () => {
-  const [menus] = useMenu();
-  const salad = menus.filter((menu) => menu.category === "salad");
-  const soup = menus.filter((menu) => menu.category === "soup");
-  const dessert = menus.filter((menu) => menu.category === "dessert");
-  const pizza = menus.filter((menu) => menu.category === "pizza");
-  const offered = menus.filter((menu) => menu.category === "offered");
+  const [menu] = useMenu();
+  const salad = menu.filter((item) => item.category === "salad");
+  const soup = menu.filter((item) => item.category === "soup");
+  const dessert = menu.filter((item) => item.category === "dessert");
+  const pizza = menu.filter((item) => item.category === "pizza");
+  const offered = menu.filter((item) => item.category === "offered");
 
   return (
     <div>

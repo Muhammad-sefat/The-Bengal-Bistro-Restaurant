@@ -3,8 +3,8 @@ import SharedPage from "./SharedPage";
 import SingleMenu from "./SingleMenu";
 
 const MenuSection = () => {
-  const [menus] = useMenu();
-  const datas = menus.filter((menu) => menu.category === "soup");
+  const [menu] = useMenu();
+  const datas = menu.filter((item) => item.category === "soup");
   return (
     <div>
       <SharedPage

@@ -7,7 +7,6 @@ const Navbar = () => {
   const { logOut, user } = useAuth();
 
   const [cart] = useCart();
-  console.log(cart);
 
   const navMenu = (
     <>

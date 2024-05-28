@@ -7,7 +7,7 @@ import useCart from "../Hooks/useCart";
 const FoodCard = ({ item }) => {
   const { name, image, recipe, _id, price } = item;
   const { user } = useAuth();
-  const [refetch] = useCart();
+  const [, refetch] = useCart();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const location = useLocation();

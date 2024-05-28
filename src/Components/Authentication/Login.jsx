@@ -4,9 +4,9 @@ import { useForm } from "react-hook-form";
 import useAuth from "../Hooks/useAuth";
 import toast from "react-hot-toast";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
+
 const Login = () => {
-  const { signIn, signInWithGoogle, user } = useAuth();
-  console.log(user);
+  const { signIn, signInWithGoogle } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
@@ -30,21 +30,20 @@ const Login = () => {
     }
   };
 
-  const googleSignIn = async () => {
+  const googleSignIn = () => {
     try {
-      await signInWithGoogle();
-      toast.success("SignIn Successful");
+      signInWithGoogle().then((res) => {
+        toast.success("SignIn Successful");
 
-      const userInfo = {
-        name: user?.displayName,
-        email: user?.email,
-      };
-      console.log(userInfo);
-
-      axiosPublic.post("/users", userInfo).then((res) => {
-        if (res.data.insertedId) {
-          navigate(from);
-        }
+        const userInfo = {
+          name: res.user?.displayName,
+          email: res.user?.email,
+        };
+        axiosPublic.post("/users", userInfo).then((res) => {
+          if (res.data.insertedId) {
+            navigate("/");
+          }
+        });
       });
     } catch (err) {
       toast.error(err.message);

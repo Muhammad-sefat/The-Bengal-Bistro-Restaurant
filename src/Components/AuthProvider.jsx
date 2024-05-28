@@ -11,24 +11,37 @@ import {
 import { GoogleAuthProvider } from "firebase/auth";
 const provider = new GoogleAuthProvider();
 import { app } from "./Firebase.config";
+import useAxiosPublic from "./Hooks/useAxiosPublic";
 
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
+
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
+  const axiosPublic = useAxiosPublic();
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
       if (user) {
-        setUser(user);
+        // create user and store client
+        const userInfo = { email: user.email };
+        axiosPublic.post("/jwt", userInfo).then((res) => {
+          if (res.data.token) {
+            localStorage.setItem("Access-Token", res.data.token);
+          }
+        });
+      } else {
+        // Remove token
+        localStorage.removeItem("Access-Token");
       }
       setLoading(false);
     });
     return () => {
       return unSubscribe();
     };
-  }, []);
+  }, [axiosPublic]);
 
   const creatUser = (email, password) => {
     setLoading(true);

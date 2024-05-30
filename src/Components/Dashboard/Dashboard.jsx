@@ -10,11 +10,12 @@ import {
 import { FaCartShopping, FaPeopleGroup, FaUser } from "react-icons/fa6";
 import { NavLink, Outlet } from "react-router-dom";
 import useCart from "../Hooks/useCart";
+import useAdmin from "../Hooks/useAdmin";
 
 const Dashboard = () => {
   const [cart] = useCart();
 
-  const isAdmin = true;
+  const [isAdmin] = useAdmin();
   return (
     <div className="flex">
       <div className="w-64 min-h-screen bg-yellow-400 mr-5">
@@ -23,10 +24,10 @@ const Dashboard = () => {
             The Bengal Bistro <span className="text-xs">Restaurant</span>
           </a>
         </div>
-        {isAdmin ? (
-          <>
-            {" "}
-            <ul className="menu p-4">
+        <ul className="menu p-4">
+          {isAdmin ? (
+            <>
+              {" "}
               <li className="mt-4">
                 <NavLink to={"/dashboard/adminHome"}>
                   {" "}
@@ -53,39 +54,10 @@ const Dashboard = () => {
                   <FaPeopleGroup></FaPeopleGroup>ALL USERS
                 </NavLink>
               </li>
-
-              <div className="divider"></div>
-
-              <li className="mt-4">
-                <NavLink to={"/"}>
-                  {" "}
-                  <FaHome></FaHome> HOME
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to={"/our-menu"}>
-                  {" "}
-                  <FaBars></FaBars> MENU
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to={"/our-shop"}>
-                  {" "}
-                  <FaShoppingBag></FaShoppingBag> SHOP
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to={"/contact"}>
-                  {" "}
-                  <FaEnvelope></FaEnvelope> CONTACT
-                </NavLink>
-              </li>
-            </ul>
-          </>
-        ) : (
-          <>
-            {" "}
-            <ul className="menu p-4">
+            </>
+          ) : (
+            <>
+              {" "}
               <li className="mt-4">
                 <NavLink to={"/dashboard/userHome"}>
                   {" "}
@@ -117,36 +89,35 @@ const Dashboard = () => {
                   <FaVideo></FaVideo> MY BOOKING
                 </NavLink>
               </li>
+            </>
+          )}
+          <div className="divider"></div>
 
-              <div className="divider"></div>
-
-              <li className="mt-4">
-                <NavLink to={"/"}>
-                  {" "}
-                  <FaHome></FaHome> HOME
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to={"/our-menu"}>
-                  {" "}
-                  <FaBars></FaBars> MENU
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to={"/our-shop"}>
-                  {" "}
-                  <FaShoppingBag></FaShoppingBag> SHOP
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to={"/contact"}>
-                  {" "}
-                  <FaEnvelope></FaEnvelope> CONTACT
-                </NavLink>
-              </li>
-            </ul>
-          </>
-        )}
+          <li className="mt-4">
+            <NavLink to={"/"}>
+              {" "}
+              <FaHome></FaHome> HOME
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to={"/our-menu"}>
+              {" "}
+              <FaBars></FaBars> MENU
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to={"/our-shop"}>
+              {" "}
+              <FaShoppingBag></FaShoppingBag> SHOP
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to={"/contact"}>
+              {" "}
+              <FaEnvelope></FaEnvelope> CONTACT
+            </NavLink>
+          </li>
+        </ul>
       </div>
       <div className="flex-1 px-8">
         <Outlet></Outlet>

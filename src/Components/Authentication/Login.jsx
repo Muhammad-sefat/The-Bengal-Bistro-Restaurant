@@ -33,15 +33,14 @@ const Login = () => {
   const googleSignIn = () => {
     try {
       signInWithGoogle().then((res) => {
-        toast.success("SignIn Successful");
-
         const userInfo = {
           name: res.user?.displayName,
           email: res.user?.email,
         };
         axiosPublic.post("/users", userInfo).then((res) => {
-          if (res.data.insertedId) {
-            navigate("/");
+          if (res.data?.insertedId) {
+            toast.success("SignIn Successful");
+            navigate(from);
           }
         });
       });
